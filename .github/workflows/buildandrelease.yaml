@@ -9,7 +9,8 @@ jobs:
   build-and-publish:
     runs-on: ubuntu-latest
     permissions:
-      repository-projects: write
+      contents: read
+      packages: write
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
