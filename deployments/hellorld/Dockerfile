@@ -2,7 +2,8 @@ FROM --platform=${BUILDPLATFORM} golang:1.20-alpine as builder
 ARG TARGETOS
 ARG TARGETARCH
 WORKDIR /src
-COPY go.mod go.sum ./
+# ...this has no go.sum...
+COPY go.mod ./
 RUN go mod download
 COPY . ./
 RUN --mount=target=. \
