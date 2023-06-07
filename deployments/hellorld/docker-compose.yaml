@@ -1,0 +1,4 @@
+services:
+  hellorld:
+    image: ghcr.io/thediveo/hellorld
+    
