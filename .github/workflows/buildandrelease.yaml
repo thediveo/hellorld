@@ -42,7 +42,6 @@ jobs:
       
       - name: Prepare (fake) Go workspace
         shell: bash
-        id: contexts
         run: |
           mkdir .emptyctx
           NUMCONTEXTS=9
