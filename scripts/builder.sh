@@ -25,8 +25,9 @@ docker start registry || docker run -d -p 5000:5000 --restart=always --name regi
 echo "🏗  building..."
 rm -rf dist/
 mkdir -p dist/
-docker buildx build \
+./scripts/docker-build.sh \
+    ./deployments/hellorld/Dockerfile \
+    -t localhost:5000/hellorld \
     --builder "${BOBTHEBUILDER}" --platform "${PLATFORMS}" \
     --push \
-    --network host \
-    -t localhost:5000/hellorld -f deployments/hellorld/Dockerfile .
+    --network host

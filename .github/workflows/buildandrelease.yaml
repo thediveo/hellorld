@@ -40,6 +40,21 @@ jobs:
             type=semver,pattern={{major}}
             type=raw,value={{sha}},enable=${{ github.ref_type != 'tag' }}
       
+      - name: Prepare (fake) Go workspace
+        shell: bash
+        id: contexts
+        run: |
+          mkdir .emptyctx
+          NUMCONTEXTS=9
+          buildcontexts=""
+          for ((ctxno=1;ctxno<=NUMCONTEXTS;ctxno++)); do
+            buildcontexts+=$'\n'"bctx${ctxno}=.emptyctx"
+          done
+          EOF="**ENDOFTHEINTERNET**"
+          echo "BUILDCONTEXTS<<$EOF" >> $GITHUB_ENV
+          echo "$buildcontexts" >> $GITHUB_ENV
+          echo "$EOF" >> $GITHUB_ENV
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
@@ -49,3 +64,5 @@ jobs:
           push: ${{ github.ref_type == 'tag' }}
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
+          build-args: WSDISKPATHS=./hellorld
+          build-contexts: ${{ env.BUILDCONTEXTS }}
