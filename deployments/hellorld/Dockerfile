@@ -1,4 +1,5 @@
-FROM --platform=${BUILDPLATFORM} golang:1.20-alpine as builder
+FROM --platform=${BUILDPLATFORM:-linux/amd64} golang:1.20-alpine as builder
+ARG BUILDPLATFORM
 ARG TARGETOS
 ARG TARGETARCH
 WORKDIR /src
