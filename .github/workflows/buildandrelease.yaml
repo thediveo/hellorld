@@ -8,6 +8,8 @@ on:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+    permissions:
+      repository-projects: write
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
@@ -30,7 +32,7 @@ jobs:
         uses: docker/metadata-action@v3
         id: metadata # later referenced as "steps.metadata."
         with:
-          images: ${{ github.repository }}
+          images: ${{ ghcr.io/github.repository }}
           tags: |
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
