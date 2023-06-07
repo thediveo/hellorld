@@ -20,6 +20,16 @@ build stage is target platform-specific. For the Go binary build stage we always
 use the build platform and then simply cross-compile, one of the greatest
 features of the Go toolchain.
 
+## I Feel Lucky
+
+Deploy the hellorld container by `wget`-ing the composer file and then piping it
+straight into Docker compose(r). No risk, no fun. You might want to check the
+composer file first, though.
+
+```bash
+wget -q -O - https://github.com/thediveo/hellorld/raw/master/deployments/hellorld/docker-compose.yaml | docker compose -f - up
+```
+
 ## Github Workflow
 
 See `.github/workflows/buildandrelease.yaml` for the ugly details.
